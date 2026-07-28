@@ -1,10 +1,10 @@
-public class employee {
+public class Employee {
     private final String name;
     private final double salary;
     private final int workHours;
     private final int hireYear;
 
-    employee(int hireYear, int workHours, double salary, String name){
+    Employee(int hireYear, int workHours, double salary, String name){
         this.name = name;
         this.workHours = workHours;
         this.salary = salary;

@@ -1,9 +1,9 @@
-public class myEmployee {
+public class MyEmployee {
     public String name;
     public double salary;
     public int workHours, hireYear;
 
-    myEmployee(String name, double salary, int workHours, int hireYear) {
+    MyEmployee(String name, double salary, int workHours, int hireYear) {
         this.name = name;
         this.salary = salary;
         this.workHours = workHours;
@@ -36,8 +36,8 @@ public class myEmployee {
             return this.salary * 0.15;
         }
     }
-    public void toString(myEmployee emp){
-        myEmployee emp1 = new myEmployee("Ozgur",2000,45,1985);
+    public void toString(MyEmployee emp){
+        MyEmployee emp1 = new MyEmployee("Ozgur",2000,45,1985);
         System.out.println("Tax : " + emp1.tax());
         System.out.println("Bonus : " + emp1.bonus());
         System.out.println("Increase : " + emp1.increase());

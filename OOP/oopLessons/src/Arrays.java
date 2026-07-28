@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class arrays {
+public class Arrays {
     public static void main(String[] args){
 
         int[] liste = new int[5];

@@ -1,6 +1,4 @@
-import java.util.Scanner;
-
-public class palindromPlus {
+public class PalindromPlus {
     public static void main(String[] args){
 
     String str = "kapak", temp ="";

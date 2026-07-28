@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class randomNumber {
+public class RandomNumber {
     public static void main(String[] args) {
 
         int tahmin, can = 5, i = 0;

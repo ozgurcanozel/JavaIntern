@@ -1,4 +1,4 @@
-public class multiArrays {
+public class MultiArrays {
     public static void main(String[] args){
         // int[] 1Darr = new int[5];
 

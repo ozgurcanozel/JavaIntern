@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class averageArrays {
+public class AverageArrays {
     public static void main(String[] args){
 
         int[] notlar = new int[7];
