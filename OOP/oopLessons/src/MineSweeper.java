@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
+public class MineSweeper {
 
     int rowNumber, colNumber, size;
     int[][] map;
@@ -17,13 +17,19 @@ public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
         this.map = new int[rowNumber][colNumber];
         this.board = new int[rowNumber][colNumber];
         this.size = rowNumber * colNumber;
+
+        // Kullanıcıya gösterilecek tahtanın (board) başlangıç ayarı (-3 açılmamış hücre)
+        for (int i = 0; i < rowNumber; i++) {
+            for (int j = 0; j < colNumber; j++) {
+                this.board[i][j] = -3;
+            }
+        }
     }
 
     public void run() {
         int row, col;
         prepareGame();
-        // Test etmek istersen map'i bastırabilirsin, normal oyunda gizli olmalı:
-        print(map);
+
         System.out.println("Oyun basladi !");
 
         while(game) {
@@ -36,7 +42,7 @@ public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
             // Sınır (Bounds) Kontrolü
             if (row < 0 || row >= rowNumber || col < 0 || col >= colNumber) {
                 System.out.println("Gecersiz koordinat! Lutfen harita sinirlari icinde bir deger girin.");
-                continue; // Döngüyü başa sarar, tekrar girdi ister
+                continue;
             }
 
             if (map[row][col] != -1) {
@@ -51,9 +57,9 @@ public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
 
     public void checkMine(int r, int c) {
         if (map[r][c] == 0) {
-            int mineCount = 0; // O hücre için ayrı bir sayaç tutmak daha güvenlidir
+            int mineCount = 0;
 
-            // 4 Yön Kontrolü (Hatalar düzeltildi)
+            // 4 Yön Kontrolü
             if ((c < colNumber - 1) && (map[r][c + 1] == -1)) {
                 mineCount++;
             }
@@ -70,10 +76,9 @@ public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
             if (mineCount == 0) {
                 board[r][c] = -2; // Etrafta mayın yoksa özel bir değer (-2) ata
             } else {
-                board[r][c] = mineCount;
+                board[r][c] = mineCount; // Etraftaki mayın sayısını ata
             }
 
-            // map üzerinde buranın açıldığını işaretleyelim ki tekrar kontrol edilmesin
             map[r][c] = 1;
         }
     }
@@ -95,15 +100,14 @@ public class MineSweeper { // Sınıf isimleri büyük harfle başlamalı
     public void print(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
-                // Süslü parantezler eklendi ve görünüm düzenlendi
-                if (arr[i][j] >= 0) {
-                    System.out.print(" " + arr[i][j] + " ");
+                if (arr[i][j] == -3) { // Henüz açılmamış hücre
+                    System.out.print("-  ");
+                } else if (arr[i][j] >= 0) { // Açılmış ve etrafındaki mayın sayısı
+                    System.out.print(arr[i][j] + "  ");
                 } else if (arr[i][j] == -1) { // Mayın
                     System.out.print("*  ");
-                } else if (arr[i][j] == -2) { // Boş alan
+                } else if (arr[i][j] == -2) { // Etrafında hiç mayın olmayan boş alan
                     System.out.print("0  ");
-                } else { // Varsayılan durum (Henüz açılmamış hücreler için 0 görünüyordu, bunu da dizayn edebilirsin)
-                    System.out.print("-  ");
                 }
             }
             System.out.println();
