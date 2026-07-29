@@ -14,8 +14,8 @@ public class Academicien extends Worker{
                 this.ders = ders;
         }
 
-        public void derseGir(){
-                System.out.println("Derse Girildi !");
+        public void giris(){
+                System.out.println(this.adSoyad + " kisisi A kapisindan giris yapti ! ");
         }
 
         public String getBolum(){

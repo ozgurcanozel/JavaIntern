@@ -10,5 +10,9 @@ public class Main {
 
         Researcher r = new Researcher("Ozgurcan Ozel", "o@gmail.com", "05072434321", "Computer Science", "Hoca","java", "Proffesor");
         r.giris();
+        a.giris();
+
+        Worker w = new Worker("Derya Alan", "derya@gmail.com", "05032434321");
+        w.giris();
     }
 }
