@@ -12,7 +12,6 @@ public class SiniflarArasi {
 
         A a = new A();
         B b = new B();
-        a.run(b);
-
+        a.b = b;
     }
 }
