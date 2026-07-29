@@ -1,3 +1,5 @@
+package Encapsulation;
+
 public class EncapsulationBook {
 
     public String name, author, publisher;

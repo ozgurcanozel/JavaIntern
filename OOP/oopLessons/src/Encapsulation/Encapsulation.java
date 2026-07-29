@@ -1,4 +1,4 @@
-import static java.lang.System.out;
+package Encapsulation;
 
 public class Encapsulation{
     public static void main(String[] args){
