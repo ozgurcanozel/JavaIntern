@@ -16,10 +16,27 @@ public class EncapsulationBook {
         }
     }
 
-    public void pageSize(){
-        System.out.println(numberOfPage);
+    // private olan bir degiskeni baska bir sinifta cagirabilmek icin methodunu getter olarak yazmamiz lazim
+    public int getNumberOfPage(){
+        return this.numberOfPage;
     }
 
+    public void setNumberOfPage(int Size){
+        if (Size < 1){
+            System.out.println("Sayfa sayisi negatif olamaz !");
+            this.numberOfPage = 10;
+        }else{
+            this.numberOfPage = Size;
+
+        }
+    }
+
+    public String getName(){
+        return this.name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 
 }
 
