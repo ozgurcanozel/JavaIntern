@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Game {
     Player player;
     Location location;
+    Scanner scan = new Scanner(System.in);
 
     public void LogIn(){
 
@@ -12,7 +13,41 @@ public class Game {
         System.out.print("Oyuna baslamadan once isminizi giriniz : ");
         String playerName = scan.nextLine();
 
-        Player player = new Player(playerName);
+        player = new Player(playerName);
         player.selectChar();
+
+        start();
+    }
+
+    public void start(){
+        while(true){
+            System.out.println();
+            System.out.println("=====================");
+            System.out.println("Eylem Gerceklestirmek Icin Bir Yer Seciniz : ");
+            System.out.println("1. Guvenli Ev --> Size ait guvenli bir yer, dusman yok.");
+            System.out.println("2. Magara --> Karsiniza belki zombi cikabilir.");
+            System.out.println("3. Orman --> Karsiniza belki Vampir cikabilir.");
+            System.out.println("4. Nehir --> Karsiniza belki Ayı cikabilir.");
+            System.out.println("5. Magaza --> Silah ya da zirh alabilirsiniz.");
+            System.out.print("Gitmek istediginiz yer : ");
+
+            int selLocation = scan.nextInt();
+
+            while(selLocation<0 || selLocation>5){
+                System.out.print("Lutfen gecerli bir yer seciniz : ");
+                selLocation = scan.nextInt();
+            }
+            switch (selLocation){
+                case 1:
+                    location = new SafeHouse(player);
+                    break;
+                default:
+                    location = new SafeHouse(player);
+            }
+            if(! location.getLocation()){
+                System.out.println("Oyun Bitti !");
+                break;
+            }
+        }
     }
 }

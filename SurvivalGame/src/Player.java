@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Player {
 
-    private int damage, healthy, money;
+    private int damage, healthy, money, rHealthy;
     private String name, cName;
     private Inventory inv;
 
@@ -17,28 +17,14 @@ public class Player {
 
         switch (charMenu()){
             case 1 :
-                setcName("Samuray");
-                setDamage(5);
-                setHealthy(21);
-                setMoney(15);
-
+                initPlayer("Samuray",5,21,15);
             case 2 :
-                setcName("Okcu");
-                setDamage(7);
-                setHealthy(18);
-                setMoney(20);
-
+                initPlayer("Okcu", 7,18,20);
             case 3 :
-                setcName("Sovalye");
-                setDamage(8);
-                setHealthy(24);
-                setMoney(5);
+                initPlayer("Sovalye", 8,24,5);
                 break;
             default:
-                setcName("Samuray");
-                setDamage(5);
-                setHealthy(21);
-                setMoney(15);
+                initPlayer("Samuray",5,21,15);
                 break;
         }
         System.out.println("Karakter : " + getcName() + " ,Hasar : " + getDamage() + " ,Saglik : " + getHealthy() + " ,Para : " + getMoney());
@@ -58,6 +44,14 @@ public class Player {
         }
 
         return charID;
+    }
+
+    public void initPlayer(String cName, int dmg, int hlthy, int mny){
+        setcName(cName);
+        setDamage(dmg);
+        setHealthy(hlthy);
+        setMoney(mny);
+        setrHealthy(hlthy);
     }
 
     // encapsulation yapacagiz getter ve setterla
@@ -107,5 +101,13 @@ public class Player {
 
     public void setInv(Inventory inv){
         this.inv = inv;
+    }
+
+    public int getrHealthy(){
+        return rHealthy;
+    }
+
+    public void setrHealthy(int rHealthy){
+        this.rHealthy = rHealthy;
     }
 }
