@@ -11,6 +11,7 @@ public class Player {
     // su anlik sadece player icin constructor olusturuyorum
     public Player(String name){
         this.name = name;
+        this.inv = new Inventory();
     }
 
     public void selectChar(){
@@ -18,10 +19,12 @@ public class Player {
         switch (charMenu()){
             case 1 :
                 initPlayer("Samuray",5,21,15);
+                break;
             case 2 :
                 initPlayer("Okcu", 7,18,20);
+                break;
             case 3 :
-                initPlayer("Sovalye", 8,24,5);
+                initPlayer("Sovalye", 8,24,10);
                 break;
             default:
                 initPlayer("Samuray",5,21,15);
