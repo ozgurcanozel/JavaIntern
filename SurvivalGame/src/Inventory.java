@@ -70,6 +70,5 @@ public class Inventory {
     public void setWater(boolean water) {
         this.water = water;
     }
-
 }
 
