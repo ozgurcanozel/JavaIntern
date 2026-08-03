@@ -49,6 +49,10 @@ public class Player {
         return charID;
     }
 
+    public int gettotalDamage(){
+        return this.getDamage() + this.getInv().getDamage();
+    }
+
     public void initPlayer(String cName, int dmg, int hlthy, int mny){
         setcName(cName);
         setDamage(dmg);

@@ -20,6 +20,8 @@ public class ToolStore extends NormalLoc{
                 buyWeapon(SelItemID);
                 break ;
             case 2:
+                SelItemID = armorMenu();
+                buyArmor(SelItemID);
                 break;
             default:
                 break;
@@ -37,36 +39,88 @@ public class ToolStore extends NormalLoc{
         return SelWeaponID;
     }
 
-    public void buyWeapon(int itemID){
-        int damage= 0 ,price = 0;
+    public void buyWeapon(int itemID) {
+        int damage = 0, price = 0;
         String wName = null;
 
-        switch (itemID){
-            case 1 :
+        switch (itemID) {
+            case 1:
                 wName = "Tabanca";
                 price = 25;
                 damage = 2;
                 break;
-            case 2 :
+            case 2:
                 wName = "Kilic";
                 price = 35;
                 damage = 3;
                 break;
-            case 3 :
+            case 3:
                 wName = "Tufek";
                 price = 45;
                 damage = 7;
                 break;
+            case 4:
+                System.out.println("Cikis yapiliyor !");
+                return;
             default:
                 System.out.println("Gecersiz islem !!");
+                return;
         }
-        if(player.getMoney() >= price){
+
+        if (player.getMoney() >= price) {
             player.getInv().setDamage(damage);
             player.getInv().setwName(wName);
             player.setMoney(player.getMoney() - price);
-            System.out.println( wName + " satin aldiniz, Onceki hasar : " + player.getDamage() + " Yeni hasar : " + (player.getDamage() + player.getInv().getDamage()));
+            System.out.println(wName + " satin aldiniz, Onceki hasar : " + player.getDamage() + " Yeni hasar : " + player.gettotalDamage());
+        } else {
+            System.out.println("Bakiye Yetersiz !!!");
+        }
+    }
 
-        }else{
+    public int armorMenu(){
+        System.out.println("1. Hafif ->\t Para : 15, Hasar : 1");
+        System.out.println("2. Orta ->\t Para : 25, Hasar : 3");
+        System.out.println("3. Agir ->\t Para : 40, Hasar : 5");
+        System.out.println("4. Iptal");
+        System.out.println("Zirh Secimini Yapiniz : ");
+        int SelArmorID = scan.nextInt();
+        return SelArmorID;
+    }
+
+    public void buyArmor(int itemID) {
+        int avoid = 0, price = 0;
+        String aName = null;
+
+        switch (itemID) {
+            case 1:
+                aName = "Hafif zirh";
+                price = 15;
+                avoid = 1;
+                break;
+            case 2:
+                aName = "Orta Zirh";
+                price = 25;
+                avoid = 3;
+                break;
+            case 3:
+                aName = "Agir Zirh";
+                price = 40;
+                avoid = 5;
+                break;
+            case 4:
+                System.out.println("Cikis yapiliyor !");
+                return;
+            default:
+                System.out.println("Gecersiz islem !!");
+                return;
+        }
+        if (player.getMoney() >= price) {
+            player.getInv().setArmor(avoid);
+            player.getInv().setaName(aName);
+            player.setMoney(player.getMoney() - price);
+            System.out.println(aName + " satin aldiniz, Engellenen Hasar : " + player.getInv().getArmor());
+            System.out.println("Kalan Para : " + player.getMoney());
+        } else {
             System.out.println("Bakiye Yetersiz !!!");
         }
     }
