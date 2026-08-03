@@ -3,11 +3,13 @@ import java.util.Locale;
 public abstract class BattleLoc extends Location{
 
     protected Obstacle obstacle;
+    protected String award;
 
-    BattleLoc(Player player, String name, Obstacle obstacle){
+    BattleLoc(Player player, String name, Obstacle obstacle,String award){
         super(player);
         this.name = name;
         this.obstacle = obstacle;
+        this.award = award;
 
     }
 
@@ -16,24 +18,67 @@ public abstract class BattleLoc extends Location{
         int obsCount = obstacle.count();
         System.out.println("Suan Buradasiniz : " + this.getName());
         System.out.println("Dikkatli ol !! Burada " + obsCount + " tane " + obstacle.getName() + " bulunuyor.");
-        System.out.println("<S>avas veya <K>ac ");
-        String selCase = scan.next();
+        System.out.print("<S>avas veya <K>ac ");
+        String selCase = scan.nextLine();
         selCase = selCase.toUpperCase();
         if (selCase.equals("S")){
             if(combat(obsCount)){
                 System.out.println(this.getName() + " Bolgesindeki Tum Dusmanlari Temizlediniz ! ");
-            }else{
-                System.out.println("öldunuz !!");
+                if (this.award.equals("Food") && player.getInv().isFood() == false){
+                    System.out.println(this.award + " Kazandiniz !");
+                    player.getInv().setFood(true);
+                } else if (this.award.equals("Water") && player.getInv().isWater() == false) {
+                    System.out.println(this.award + " Kazandiniz !");
+                    player.getInv().setWater(true);
+                }else if (this.award.equals("Firewood") && player.getInv().isFirewood() == false) {
+                    System.out.println(this.award + " Kazandiniz !");
+                    player.getInv().setFirewood(true);
+                }
+                return true;
+            }if (player.getHealthy() <= 0 ){
+                System.out.println("öldunuz !");
                 return false;
             }
+
         }
         return true;
     }
 
    public boolean combat(int obsCount){
         for (int i = 0; i < obsCount; i++){
+            int defObsHealth = obstacle.getHealth();
             playerStats();
             enemyStats();
+
+            while(player.getHealthy() > 0 && obstacle.getHealth() > 0){
+                System.out.print("<V>ur veya <Kac>");
+                String hit = scan.nextLine();
+                hit = hit.toUpperCase();
+
+                if (hit.equals("V")){
+                    System.out.println("Siz vurdunuz !");
+                    obstacle.setHealth(obstacle.getHealth() - player.gettotalDamage());
+                    afterHit();
+                    if (obstacle.getHealth() > 0){
+                        System.out.println();
+                        System.out.println("Canavar size vurdu ! ");
+                        player.setHealthy(player.getHealthy() - (obstacle.getDamage() - player.getInv().getArmor()));
+                        afterHit();
+                    }
+                }else{
+                    return false;
+                }
+            }
+            if (obstacle.getHealth() <player.getHealthy()){
+                System.out.println("Dusmani yendiniz. ");
+                player.setMoney(player.getMoney() + obstacle.getAward());
+                System.out.println("Guncel paraniz :  " + player.getMoney());
+                obstacle.setHealth(defObsHealth);
+
+            }else{
+                return false;
+            }
+            System.out.println("---------------------------");
         }
         return true;
    }
@@ -46,7 +91,7 @@ public abstract class BattleLoc extends Location{
             System.out.println("Silah : " + player.getInv().getwName());
         }
        if(player.getInv().getArmor() > 0){
-           System.out.println("Zirh : " + player.getInv().getaName());
+           System.out.println("Zirh : " + player.getInv().getaName() + "Engelleyecegi Hasar" + player.getInv().getArmor());
        }
    }
    public void enemyStats(){
@@ -54,5 +99,11 @@ public abstract class BattleLoc extends Location{
        System.out.println("Can : " + obstacle.getHealth());
        System.out.println("Hasar : " + obstacle.getDamage());
        System.out.println("Odul : " + obstacle.getAward());
+   }
+
+   public void afterHit(){
+        System.out.println("Oyuncu Cani : " + player.getHealthy());
+        System.out.println(obstacle.getName() + " cani : " + obstacle.getHealth());
+       System.out.println("--------------");
    }
 }
