@@ -32,7 +32,7 @@ public class Game {
             System.out.print("Gitmek istediginiz yer : ");
             int selLocation = scan.nextInt();
 
-            if (selLocation < 0 || selLocation >= 5) {
+            if (selLocation < 0 || selLocation > 5) {
                 System.out.println("Lutfen gecerli bir yer seciniz :");
                 selLocation = scan.nextInt();
             }
