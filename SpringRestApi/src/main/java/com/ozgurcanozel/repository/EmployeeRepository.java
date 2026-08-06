@@ -13,8 +13,19 @@ public class EmployeeRepository {
     private List<Employee> employeeList;
 
     public List<Employee> getAllEmployeeList(){
-
-    return employeeList;
+     return employeeList;
     // sanki veritabanindan cekmisiz gibi
-}
+    }
+    // "/employee-list" icinden id'si su olan employeeyi getir methodu yazacagiz yazarkende path Variable kullanilacak
+
+    public Employee getEmployeeByID(String id){
+        Employee findEmployee = null;
+        for (Employee employee : employeeList){
+            if (id.equals(employee.getId())){
+                findEmployee = employee;
+                break;
+            }
+        }
+        return findEmployee;
+    }
 }

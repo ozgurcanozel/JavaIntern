@@ -18,6 +18,10 @@ public class EmployeeService {
         // 100'lerce satir kontrolu yapacaksiniz
         return employeeRepository.getAllEmployeeList();
     }
+    public Employee getEmployeeBuyID(String id){
+
+        return employeeRepository.getEmployeeByID(id);
+    }
 
 
 }
